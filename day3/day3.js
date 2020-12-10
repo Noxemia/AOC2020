@@ -18,7 +18,7 @@ function readLines(modx, mody) {
         let posy = 0;
         let treeCounter = 0;
         interface.on("line", (line) => {
-            
+            console.log(posx)
             if((posy % mody) == 0){
                 if(line.split('')[posx] == '#') treeCounter++
                 posx = posx + modx
@@ -37,11 +37,11 @@ function readLines(modx, mody) {
 }
 
 async function main(){
-    let f = readLines(1,1)
+    //let f = readLines(1,1)
     let s = readLines(3,1)
-    let t = readLines(5,1)
-    let fo = readLines(7,1)
-    let fi = readLines(1,2)
+    //let t = readLines(5,1)
+   // let fo = readLines(7,1)
+    //let fi = readLines(1,2)
 
     return Promise.all([f, s, t, fo, fi])
 }
