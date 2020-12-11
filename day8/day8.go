@@ -20,34 +20,29 @@ func main() {
 	}
 	acc = 0
 	//part 1
-	//fmt.Println(instruction(dataStrings, 0))
+	fmt.Println(instruction(dataStrings, 0))
 
 	for i, insts := range dataStrings {
-		copy := dataStrings
+		var copy []string
+
+		for _, elem := range dataStrings {
+			copy = append(copy, elem)
+		}
+
 		if string(insts[0]) == "j" {
 			newConfig := "n" + insts[1:]
-			//fmt.Println(newConfig)
 			copy[i] = string(newConfig)
 			instConfigs = append(instConfigs, copy)
 		}
 	}
-	fmt.Println(instConfigs)
 
-	for i, newInstructions := range instConfigs {
-		fmt.Println(newInstructions[i])
+	for _, inst := range instConfigs {
 		for i := range visited {
 			visited[i] = false
 		}
 		acc = 0
-		check := instruction(newInstructions, 0)
-		fmt.Println(check)
-		fmt.Println(i)
-
+		fmt.Println(instruction(inst, 0))
 	}
-	acc = 0
-	fmt.Println(acc)
-	//fmt.Println(instruction(instConfigs[0], 0))
-	fmt.Println(acc)
 
 }
 
@@ -57,7 +52,7 @@ var acc int
 
 func instruction(instructions []string, pc int) int {
 	if visited[pc] == true {
-		return acc
+		return 0
 	}
 	visited[pc] = true
 
@@ -73,7 +68,8 @@ func instruction(instructions []string, pc int) int {
 		}
 		return instruction(instructions, pc+1)
 	} else if string(instructions[pc][0]) == "e" {
-		fmt.Println("Exited")
+		fmt.Println(string(instructions[pc][0]))
+		fmt.Println("Exited", acc)
 		return acc
 	} else {
 		number, sign := parseNumberAndSign(instructions[pc])
